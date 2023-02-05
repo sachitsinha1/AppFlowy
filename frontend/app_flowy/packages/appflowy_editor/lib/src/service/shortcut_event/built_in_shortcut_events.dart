@@ -271,11 +271,6 @@ List<ShortcutEvent> builtInShortcutEvents = [
     handler: backquoteToCodeHandler,
   ),
   ShortcutEvent(
-    key: 'Markdown link or image',
-    command: 'shift+parenthesis right',
-    handler: markdownLinkOrImageHandler,
-  ),
-  ShortcutEvent(
     key: 'Exit editing mode',
     command: 'escape',
     handler: exitEditingModeEventHandler,
