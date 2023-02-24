@@ -39,7 +39,30 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
+      
+    - uses: subosito/flutter-action@v2
+      with:
+        channel: "stable"
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        cache: true
+
+    - name: Run FlowyEditor tests
+      working-directory: frontend/app_flowy/packages/appflowy_editor
+      run: |
+        flutter pub get
+        flutter format --set-exit-if-changed .
+        flutter analyze .
+        flutter test --coverage
+    - uses: codecov/codecov-action@v3
+      with: 
+        name: appflowy_editor
+        flags: appflowy_editor
+        env_vars: ${{ matrix.os }}
+        fail_ci_if_error: true
+        verbose: true
+
+
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
